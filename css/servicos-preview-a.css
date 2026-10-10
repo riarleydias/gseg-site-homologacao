@@ -530,6 +530,14 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
 .pa-pagina.pa-i-1 { --est-g-tile: url("../img/estampa/estampa-g2-n1.svg?v=20261009-r19-5c"); --est-g-op-forte: .22; --est-w-op-forte: .09; }
 .pa-pagina.pa-i-2 { --est-g-tile: url("../img/estampa/estampa-g2-n2.svg?v=20261009-r19-5c"); --est-g-op-forte: .32; --est-w-op-forte: .10; }
 .pa-pagina.pa-i-3 { --est-g-tile: url("../img/estampa/estampa-g2-n3.svg?v=20261009-r19-5c"); --est-g-op-forte: .42; --est-w-op-forte: .11; }
+/* Nível 5 — intensidade máxima desktop */
+.pa-pagina.pa-i-5 {
+  --est-g-tile: url("../img/estampa/estampa-g2-n5.svg");
+  --est-g-op: .22;
+  --est-w-op: .08;
+  --est-g-op-forte: .62;
+  --est-w-op-forte: .15;
+}
 .pa-pagina .pa-hero { --pa-zona-hero-g: linear-gradient(#000, #000); --pa-zona-hero-w: linear-gradient(#000, #000); }
 .pa-pagina .pa-hero::before, .pa-pagina .pa-hero::after {
   content: "";

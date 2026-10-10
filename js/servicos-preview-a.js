@@ -24,7 +24,7 @@
   // ----- intensidade do G da estampa: ?i=1|2|3 (sem parâmetro ou valor inválido = 2); etiqueta provisória só na prévia -----
   (function () {
     let n = '2';
-    try { const q = new URLSearchParams(window.location.search).get('i'); if (q === '1' || q === '2' || q === '3') n = q; } catch (e) {}
+    try { const q = new URLSearchParams(window.location.search).get('i'); if (q === '1' || q === '2' || q === '3' || q === '5') n = q; } catch (e) {}
     pagina.classList.add('pa-i-' + n);
     // zona de proteção atrás da assinatura da responsável técnica (hero): mesma lógica do rodapé, medida no layout real
     const hero = document.querySelector('.pa-hero');
