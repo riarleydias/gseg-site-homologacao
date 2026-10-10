@@ -562,12 +562,4 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
 .pa-pagina .pa-hero::after  { background-image: var(--est-w-tile); opacity: calc(var(--est-w-op-forte) / 2); -webkit-mask-image: linear-gradient(to right, transparent 0, transparent 40%, #000 75%), linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-w); mask-image: linear-gradient(to right, transparent 0, transparent 40%, #000 75%), linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-w); }
 @media (max-width: 767.98px), (prefers-contrast: more), (forced-colors: active), print { .pa-pagina .pa-hero::before, .pa-pagina .pa-hero::after { display: none; } }   /* celular: o texto do hero ocupa a largura toda */
 
-/* etiqueta provisória "Intensidade: 1 · 2 · 3" (só na prévia; sem JS não aparece e vale o nível 2) */
-.pa-estampa-sel { display: none; position: fixed; left: 16px; bottom: calc(16px + var(--pa-sel-sobe, 0px)); z-index: 980; padding: 6px 10px; border: 1px solid var(--pa-bronze); background: var(--pa-creme); color: var(--pa-verde); font-size: .75rem; line-height: 1.4; }
-.pa-js .pa-estampa-sel { display: block; }
-.pa-estampa-sel--oculta { visibility: hidden; }
-.pa-estampa-sel a { display: inline-block; min-width: 1.25em; text-align: center; color: var(--pa-verde); font-weight: 600; text-decoration: none; }
-.pa-estampa-sel a[aria-current="true"] { text-decoration: underline; text-underline-offset: 3px; }
-@media (max-width: 767.98px) { .pa-estampa-sel { left: 8px; bottom: calc(64px + env(safe-area-inset-bottom) + 8px + var(--pa-sel-sobe, 0px)); padding: 3px 7px; font-size: .6875rem; } }
-
 .pa-ma__faixa { width: 100%; }

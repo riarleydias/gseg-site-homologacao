@@ -21,11 +21,8 @@
   if (!pagina) return;
   pagina.classList.add('pa-js');
 
-  // ----- intensidade do G da estampa: ?i=1|2|3 (sem parâmetro ou valor inválido = 2); etiqueta provisória só na prévia -----
+  // ----- zona de proteção do hero (nível 5 da estampa fixo no HTML: pa-i-5) -----
   (function () {
-    let n = '2';
-    try { const q = new URLSearchParams(window.location.search).get('i'); if (q === '1' || q === '2' || q === '3' || q === '5') n = q; } catch (e) {}
-    pagina.classList.add('pa-i-' + n);
     // zona de proteção atrás da assinatura da responsável técnica (hero): mesma lógica do rodapé, medida no layout real
     const hero = document.querySelector('.pa-hero');
     let heroPend = false;
@@ -43,25 +40,6 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(agendarHero);
     if (window.ResizeObserver && hero) new ResizeObserver(agendarHero).observe(hero);
     agendarHero();
-    const sel = document.querySelector('.pa-estampa-sel');
-    if (!sel) return;
-    Array.prototype.forEach.call(sel.querySelectorAll('a'), function (a) {
-      a.setAttribute('aria-current', String(a.getAttribute('href') === '?i=' + n));
-    });
-    // a etiqueta sobe junto com o rodapé (desktop) ou some sobre ele (celular): nunca cobre texto do rodapé
-    const base = document.querySelector('.rodape__base');
-    if (!base) return;
-    let pend = false;
-    function subir() {
-      pend = false;
-      const sobe = Math.max(0, window.innerHeight - base.getBoundingClientRect().top);
-      sel.style.setProperty('--pa-sel-sobe', sobe + 'px');
-      sel.classList.toggle('pa-estampa-sel--oculta', sobe > 0 && window.innerWidth < 768);   // celular: não há folga ao lado do conteúdo, a etiqueta some enquanto o rodapé está na tela
-    }
-    function agendar() { if (!pend) { pend = true; window.requestAnimationFrame(subir); } }
-    window.addEventListener('scroll', agendar, { passive: true });
-    window.addEventListener('resize', agendar);
-    subir();
   })();
 
   // ----- WhatsApp: só reescreve o número se for diferente do que está no HTML -----
