@@ -39,6 +39,7 @@
     // arco do G (T2): some atrás de todo o texto do hero (eyebrow, título, subtítulo, ações, assinatura), com ~60px de transição; o brilho fica só no arco que sobra fora do texto
     const arco = hero && hero.querySelector(".pa-hero__arco");
     function zonaArco() {
+      if (window.innerWidth < 768) return;   // T9-R1: no celular o G é papel de parede (sem máscara, ver o CSS)
       const E = window.gsegEstampa; if (!arco || !E) return;
       const o = arco.getBoundingClientRect(), w = Math.round(o.width), h = Math.round(o.height); if (w < 2 || h < 2) return;
       const r = [];

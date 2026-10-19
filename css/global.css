@@ -870,7 +870,7 @@ body.sem-scroll { overflow: hidden; }
   /* Lote B — rodapé mobile compacto, com respiro para WhatsApp flutuante/safe-area */
   .rodape__grid {
     gap: var(--space-3);
-    padding-block: 20px 14px;
+    padding-block: 8px 6px;   /* T9 (C3f + calibragem 2): era 20px 14px */
   }
   .rodape h3 {
     margin-bottom: 6px;
@@ -889,9 +889,10 @@ body.sem-scroll { overflow: hidden; }
   .rodape__col ul { padding-left: 0; grid-template-columns: 1fr 1fr; gap: 0 12px; }
   .rodape__col ul li:last-child { grid-column: 1 / -1; text-align: center; }
   .rodape__base {
-    gap: 3px;
+    gap: 0;   /* T9 (calibragem B): era 3px */
+    font-size: 12px;   /* T9 (calibragem B): créditos em 12px no celular */
     padding-block: 8px calc(8px + env(safe-area-inset-bottom));
-    padding-right: 76px;
+    padding-right: max(16px, env(safe-area-inset-right, 0px));   /* T9-R1 (3-C): era 76px */
   }
   .whatsapp-float {
     right: var(--space-3);
@@ -905,8 +906,29 @@ body.sem-scroll { overflow: hidden; }
   .rodape a[href^="mailto:"],
   .rodape a[href*="wa.me"],
   .rodape a[href*="instagram"] {
-    min-height: 48px;
-    margin-block: -4px;
+    min-height: 40px;   /* T9 (C3e + calibragem 3): era 48px (T8) */
+    margin-block: -2px;   /* T9-R1: era -4px (T8) */
+  }
+}
+
+/* T9 (C3a–C3c): contatos em 2 colunas e navegação em 3 só enquanto o rodapé tem uma coluna (<600);
+   de 600 a 899 o rodapé já tem 3 colunas e os grids internos espremiam e-mail e telefone (gate Otto, 19/10) */
+@media (max-width: 599.98px) {
+  /* T9-C3a: contatos em 2 colunas */
+  .rodape__contato {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 12px;
+  }
+  /* T9-C3b: sem overflow horizontal — as células respeitam a coluna */
+  .rodape__contato > * {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  /* T9-C3c: navegação em 3 colunas */
+  .rodape__nav ul,
+  .rodape ul {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

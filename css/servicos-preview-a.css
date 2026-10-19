@@ -571,7 +571,7 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
 }
 .pa-pagina .pa-hero::before { background-image: var(--est-g-tile); background-size: 224px 224px; opacity: calc(var(--est-g-op-forte) / 2); -webkit-mask-image: linear-gradient(to right, transparent 0, transparent 40%, #000 75%), linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-g); mask-image: linear-gradient(to right, transparent 0, transparent 40%, #000 75%), linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-g); }
 .pa-pagina .pa-hero::after  { background-image: var(--est-w-tile); opacity: calc(var(--est-w-op-forte) / 2); -webkit-mask-image: linear-gradient(to right, transparent 0, transparent 40%, #000 75%), linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-w); mask-image: linear-gradient(to right, transparent 0, transparent 40%, #000 75%), linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-w); }
-@media (max-width: 767.98px), (prefers-contrast: more), (forced-colors: active), print { .pa-pagina .pa-hero::before, .pa-pagina .pa-hero::after { display: none; } }   /* celular: o texto do hero ocupa a largura toda */
+@media (prefers-contrast: more), (forced-colors: active), print { .pa-pagina .pa-hero::before, .pa-pagina .pa-hero::after { display: none; } }   /* T9-R1: a estampa volta no celular; some só em alto contraste, cores forçadas e impressão */
 
 .pa-ma__faixa { width: 100%; }
 
@@ -617,6 +617,19 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
 
   /* S5 — chip de Meio Ambiente: fundo escurecido (medido em 390: 5,37:1 com a lavagem clara → 7,18:1); a cor do texto não muda */
   .pa-ma { --pa-c-chip-fundo: rgba(0, 0, 0, .14); }
+
+  /* T9-R1 · G ornamental: papel de parede mobile */
+  .pa-pagina .pa-hero .pa-hero__arco {
+    top: 50%;
+    right: auto;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130vw;
+    max-width: none;   /* o reset.css limita svg a 100% e prendia o G na largura do hero (gate Otto, 19/10) */
+    opacity: 0.11;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
 }
 @media (max-width: 329.98px) {
   .pa-pagina { padding-bottom: calc(82.5px + 16px + env(safe-area-inset-bottom)); }
