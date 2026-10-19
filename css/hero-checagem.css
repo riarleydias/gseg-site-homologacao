@@ -350,6 +350,12 @@
   .hero__chk-btn { text-align: center; }
 }
 
+/* ─────────── T6 · 900–1149: copy com a medida cheia ───────────
+   A trava de 51,9cqw (desktop ≥900) existe para a copy não invadir o painel; aqui o painel desce para o fluxo. */
+@media (min-width: 900px) and (max-width: 1149.98px) {
+  .hero--laudo .hero__conteudo { max-width: 600px; }
+}
+
 /* ─────────── T6 · <900: painel compacto ─────────── */
 @media (max-width: 899.98px) {
   .hero__chk { margin-inline: clamp(18px, 4.5vw, 30px); }   /* o .container mobile (global.css) */
