@@ -1,0 +1,352 @@
+/* =============================================================================
+   GSEG · HERO DA HOME — PAREDE DE NRs + CHECAGEM RÁPIDA (prévia T6)
+   Carregado SÓ por index-preview-hero.html, depois de inicio.css e
+   refinamento-home.css. Nasceu de uma cópia de hero-laudo.css (T5): barra de
+   contato, coluna de copy, credenciais e faixa regulatória seguem iguais; o
+   laudo desenhado saiu. Entram a parede de NRs (máscara da estampa do rodapé)
+   e o painel creme de checagem, cujo botão abre o WhatsApp com os itens marcados.
+   ============================================================================= */
+
+:root {
+  /* altura do hero: cabe em 900px de viewport menos o header de 81px */
+  --fs-hero-mestre: clamp(40px, 4.2vw, 60px);
+
+  /* acento e superfícies do hero */
+  /* Âmbar de superfície escura. --alerta-ambar reprova
+     sobre o verde (2,93:1); este passa (6,66:1).
+     Regra: âmbar SÓ sobre verde. No creme, ênfase é
+     verde-floresta ou verde-musgo.
+     Definido aqui (e não em variaveis_LUCAS.css) para não tocar a index;
+     sobe para variaveis_LUCAS.css na promoção da prévia. */
+  --ambar-sobre-verde: #E8A33D;
+  --ambar-sobre-verde-txt: #1A2410;                  /* 7,47:1 sobre o âmbar */
+  --rotulo-sobre-verde: rgba(242, 241, 236, .60);    /* piso dos rótulos pequenos (antes .28 = 2,14:1) */
+  --laudo-fio-claro: rgba(242, 241, 236, .14);
+}
+
+/* ─────────────────────────── fundo ─────────────────────────── */
+.hero--laudo {
+  container-type: inline-size;
+  background-image: none;
+  background: linear-gradient(100deg, #121B0E 0%, #1F2E17 42%, #2F4224 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.hero--laudo::before { background: none; }   /* overlay calibrado p/ a foto; sobre cor chapada só escurece um lado */
+/* .hero::after (fecho inferior) segue como está em refinamento-home.css */
+
+/* ─────────────────────────── barra de contato ─────────────────────────── */
+.hero__barra {
+  position: relative; z-index: 9;
+  background: rgba(9, 14, 7, .44);
+  border-bottom: 1px solid var(--laudo-fio-claro);
+}
+.hero__barra-in {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: clamp(24px, 4vw, 64px);
+  min-height: max(34px, 2.36cqw);
+  display: flex; align-items: center; gap: 0 18px; flex-wrap: wrap;
+  font-family: var(--font-body);
+  font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--rotulo-sobre-verde);
+}
+.hero__barra-tel {
+  color: var(--ambar-sobre-verde); font-weight: 700; letter-spacing: .06em;
+  text-decoration: none;
+  padding-block: 15px; margin-block: -7px;   /* alvo de toque ≥44px sem engordar a barra (T6: 13/-5 dava 43,6px) */
+}
+.hero__barra-tel:hover { text-decoration: underline; text-underline-offset: 3px; }
+.hero__barra-tel:focus-visible { outline: 2px solid var(--ambar-sobre-verde); outline-offset: 2px; }
+.hero__barra-div { width: 1px; height: 12px; background: rgba(242, 241, 236, .22); }
+.hero__barra-fim { margin-left: auto; }
+
+/* ─────────────────────────── coluna de copy ─────────────────────────── */
+.hero--laudo .hero__inner { position: relative; z-index: 9; flex: 1 0 auto; }
+.hero--laudo .hero__titulo .destaque { color: var(--areia); }
+.hero--laudo .hero__risco { background: var(--ambar-sobre-verde); }
+.hero--laudo .hero__ponto { background: var(--ambar-sobre-verde); }
+.hero--laudo .hero__texto { color: var(--texto-claro-2); margin-bottom: 14px; max-width: 600px; }   /* inicio.css usa 64ch; em px para não depender da fonte carregada */
+
+.hero__rt {
+  display: flex; flex-direction: column; gap: 3px;
+  border-left: 3px solid var(--ambar-sobre-verde);            /* 0,19cqw ≈ 2,7px em 1440 — fixado em 3px (decisão do Riarley) */
+  padding: 6px 0 6px 16px; margin-bottom: 16px;
+  background: linear-gradient(90deg, rgba(232, 163, 61, .065), transparent 70%);
+}
+.hero__rt-rot { font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ambar-sobre-verde); }
+.hero__rt-nome { font-family: var(--font-body); font-size: 16px; font-weight: 600; line-height: 1.32; color: var(--texto-claro); }
+.hero__rt-reg { font-family: var(--font-body); font-size: 12px; letter-spacing: .03em; color: rgba(242, 241, 236, .72); font-variant-numeric: tabular-nums; }
+
+/* CTA primário âmbar */
+.btn--ambar { background: var(--ambar-sobre-verde); color: var(--ambar-sobre-verde-txt); border-color: var(--ambar-sobre-verde); box-shadow: 0 3px 11px rgba(0, 0, 0, .26); }
+.btn--ambar:hover { background: #F0B45A; border-color: #F0B45A; color: var(--ambar-sobre-verde-txt); }
+.btn--ambar:focus-visible { outline: 2px solid var(--texto-claro); outline-offset: 3px; }
+
+/* linha de credenciais — 4 itens com divisor vertical */
+.hero--laudo .hero__trust {
+  list-style: none; margin: 14px 0 0; padding: 12px 0 0;
+  display: flex; flex-direction: row; flex-wrap: wrap; align-items: stretch; gap: 12px 0;
+  border-top: 1px solid var(--laudo-fio-claro);
+}
+.hero--laudo .hero__trust li { display: flex; flex-direction: column; gap: 3px; padding-inline: 18px; border-left: 1px solid var(--laudo-fio-claro); }
+.hero--laudo .hero__trust li:first-child { padding-left: 0; border-left: 0; }
+.hero--laudo .hero__trust b { font-family: var(--font-body); font-size: 15px; font-weight: 700; color: var(--texto-claro); white-space: nowrap; font-variant-numeric: tabular-nums lining-nums; }
+.hero--laudo .hero__trust span {
+  display: block; font-size: 10px; font-weight: 600; letter-spacing: .14em; line-height: 1.3;
+  text-transform: uppercase; color: var(--rotulo-sobre-verde); white-space: nowrap;
+}
+
+/* entrada suave dos blocos novos (mesma gramática do refinamento-home) */
+.hero__rt { animation: heroSettle var(--motion-slow) both; animation-delay: 280ms; }
+@media (prefers-reduced-motion: reduce) {
+  .hero__rt { animation: none; opacity: 1; transform: none; }
+}
+
+/* ─────────────────────────── faixa regulatória ─────────────────────────── */
+.hero__reg {
+  --reg-h: 44px;
+  position: relative; z-index: 9;
+  display: flex; align-items: stretch; flex-wrap: wrap;
+  min-height: var(--reg-h);
+  background: rgba(9, 14, 7, .64);
+  border-top: 1px solid var(--laudo-fio-claro);
+  font-family: var(--font-body);
+}
+.hero--laudo { --reg-h: 44px; }
+.hero__reg p { margin: 0; }
+.hero__reg-selo {
+  display: flex; align-items: center; gap: 7px; flex: none;
+  padding: 0 18px 0 clamp(24px, 4vw, 64px);
+  background: rgba(232, 163, 61, .12); border-right: 1px solid rgba(232, 163, 61, .2);
+}
+.hero__reg-selo::before { content: ""; width: 5px; height: 5px; background: var(--ambar-sobre-verde); }
+.hero__reg-selo span { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ambar-sobre-verde); }
+.hero__reg-item {
+  display: flex; align-items: center; gap: 10px; min-width: 0;
+  padding: 8px 20px; border-right: 1px solid var(--laudo-fio-claro);
+  font-size: 12px; line-height: 1.35;
+}
+.hero__reg-item b { font-weight: 700; color: var(--texto-claro); white-space: nowrap; }
+.hero__reg-item span { color: rgba(242, 241, 236, .74); }
+
+/* ─────────────────────────── desktop ≥900 ─────────────────────────── */
+@media (min-width: 900px) {
+  .hero--laudo { min-height: 0; display: flex; align-items: stretch; }
+  .hero--laudo .hero__inner { display: flex; align-items: center; padding-top: 64px; padding-bottom: 64px; }
+  /* a copy nunca invade a folha: limite = início da folha (51,9cqw) menos respiro */
+  .hero--laudo .hero__conteudo { max-width: min(600px, calc(51.9cqw - clamp(24px, 4vw, 64px) - 3cqw)); }
+  .hero--laudo .hero__badge { padding-block: 7px; }
+  .hero--laudo .hero__titulo { margin: 14px 0 12px; }
+  .hero__reg { flex-wrap: nowrap; height: var(--reg-h); }
+  .hero__reg-item { flex: 0 1 auto; }
+  .hero--laudo .hero__risco { margin: 0 0 14px; }
+  .hero--laudo .hero__texto { font-size: 17px; line-height: 1.5; max-width: 560px; }   /* px, não ch: com a animação o ch congela na fonte de reserva (gate Otto f6533f8) */
+  .hero--laudo .hero__ctas { flex-wrap: wrap; gap: 12px; }
+  .hero--laudo .hero__ctas .btn { padding-inline: 20px; }
+  .hero--laudo .hero__reg-item span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
+
+/* ─────────────────────────── mobile <900 ─────────────────────────── */
+@media (max-width: 899.98px) {
+  .hero--laudo { background: linear-gradient(168deg, #121B0E 0%, #1C2A15 100%); }
+  .hero--laudo::before { background: none; }
+
+  .hero--laudo .hero__inner { padding-block: 40px 44px; }
+
+  /* barra: mantém telefone e região; o resto entra conforme cabe */
+  .hero__barra-in { gap: 0 14px; font-size: 10.5px; }
+  .hero__barra-op, .hero__barra-fim { display: none; }
+
+  /* CTAs empilhados em largura total */
+  .hero--laudo .hero__ctas { flex-direction: column; }
+  .hero--laudo .hero__ctas .btn { width: 100%; }
+
+  /* .hero__trust volta no mobile (inicio.css:1090 escondia) — 2 colunas */
+  .hero--laudo .hero__trust { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 0; }
+  .hero--laudo .hero__trust li { padding-inline: 14px; }
+  .hero--laudo .hero__trust li:nth-child(odd) { padding-left: 0; border-left: 0; }
+  .hero--laudo .hero__trust b { white-space: normal; }
+
+  /* faixa regulatória empilhada, texto inteiro (sem reticências) */
+  .hero__reg { flex-direction: column; padding: 12px clamp(24px, 4vw, 64px) 14px; gap: 8px; }
+  .hero__reg-selo { align-self: flex-start; padding: 5px 10px; border: 1px solid rgba(232, 163, 61, .3); }
+  .hero__reg-item { padding: 0; border: 0; align-items: baseline; flex-wrap: wrap; gap: 2px 8px; }
+}
+@media (min-width: 600px) and (max-width: 899.98px) {
+  .hero__barra-fim { display: initial; }   /* "Atendimento a escritórios contábeis" fica só no desktop: não cabe numa linha */
+}
+
+/* ═══════════════════════════ T6 · PAREDE DE NRs ═══════════════════════════
+   SVG inline com as 20 NRs em cinco faixas, bronze da estampa do rodapé (--areia, #C2B49B).
+   Máscara = mesma lógica da estampa do rodapé (global.css): interseção de três camadas —
+   esmaecimento topo/base ∩ rampa da esquerda (a coluna de copy fica limpa) ∩ vinheta. */
+.hero__parede {
+  position: absolute; inset: 0; z-index: 3;
+  pointer-events: none;
+  color: var(--areia);
+  opacity: .14;
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0, #000 86px, #000 calc(100% - 80px), transparent 100%),
+    linear-gradient(to right, transparent 20px, rgba(0,0,0,.34) 210px, rgba(0,0,0,.78) 440px, #000 640px),
+    radial-gradient(ellipse 80% 90% at 64% 46%, rgba(0,0,0,.60) 0, rgba(0,0,0,.70) 34%, rgba(0,0,0,.84) 60%, rgba(0,0,0,.95) 82%, #000 100%);
+          mask-image:
+    linear-gradient(to bottom, transparent 0, #000 86px, #000 calc(100% - 80px), transparent 100%),
+    linear-gradient(to right, transparent 20px, rgba(0,0,0,.34) 210px, rgba(0,0,0,.78) 440px, #000 640px),
+    radial-gradient(ellipse 80% 90% at 64% 46%, rgba(0,0,0,.60) 0, rgba(0,0,0,.70) 34%, rgba(0,0,0,.84) 60%, rgba(0,0,0,.95) 82%, #000 100%);
+  -webkit-mask-size: 100% 100%;           mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;         mask-repeat: no-repeat;
+  -webkit-mask-composite: source-in, source-in;   mask-composite: intersect, intersect;
+}
+.hero__parede svg { display: block; width: 100%; height: 100%; }
+.hero__parede text { font-family: var(--font-body); font-weight: 800; letter-spacing: .02em; }
+@media (prefers-contrast: more), (forced-colors: active), print { .hero__parede { display: none; } }
+
+/* ═══════════════════════════ T6 · PAINEL DE CHECAGEM ═══════════════════════════
+   Creme sobre o verde. Sem âmbar aqui dentro: no creme a ênfase é verde-floresta/verde-musgo. */
+.hero__chk {
+  position: relative; z-index: 14;
+  background: var(--creme);
+  color: var(--grafite);
+  border-radius: 2px;
+  overflow: hidden;
+  font-family: var(--font-body);
+  box-shadow:
+    0 1px 2px rgba(5,10,3,.44),
+    2px 6px 14px rgba(5,10,3,.26),
+    6px 20px 44px rgba(5,10,3,.30),
+    14px 44px 88px rgba(5,10,3,.34);
+}
+
+/* 5.1 tarja de cabeçalho */
+.hero__chk-cab {
+  display: flex; align-items: center; gap: 15px;
+  padding: 20px 28px 18px;
+  background: var(--verde-escuro); color: var(--creme);
+}
+.hero__chk-simbolo { flex: none; width: 34px; height: 34px; color: var(--verde-claro); }
+.hero__chk-rot {
+  margin: 0 0 4px;
+  font-size: 10px; font-weight: 700; letter-spacing: .19em; text-transform: uppercase;
+  color: var(--areia);
+}
+.hero__chk-titulo {
+  margin: 0;
+  font-family: var(--font-display-serif); font-weight: 600; font-size: 28px; line-height: 1.16;
+  color: var(--creme);
+}
+
+/* 5.2 intro */
+.hero__chk-intro {
+  margin: 0; padding: 15px 28px 4px;
+  font-size: 13.5px; line-height: 1.55; color: var(--grafite-suave);
+}
+.hero__chk-intro::after { content: ""; display: block; margin-top: 11px; border-bottom: 1px solid rgba(58,58,58,.14); }
+
+/* 5.3 os seis itens — checkbox nativo escondido por clip (continua focável) e label = linha inteira */
+.hero__chk-lista { list-style: none; margin: 0; padding: 0 28px; }
+.hero__chk-item { position: relative; }
+.hero__chk-input {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+.hero__chk-linha {
+  display: grid; grid-template-columns: 18px 17px minmax(0, 1fr) auto; align-items: center; gap: 0 14px;
+  min-height: 44px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(58,58,58,.11);
+  cursor: pointer;
+}
+.hero__chk-item:last-child .hero__chk-linha { border-bottom: 0; }
+.hero__chk-num {
+  width: 18px;
+  font-size: 11px; font-weight: 700; letter-spacing: .08em;
+  font-variant-numeric: tabular-nums;
+  color: #6D6D66;   /* o #9A9A92 do briefing dá 2,51:1 no creme; este é o mais próximo que passa (4,61:1) */
+}
+.hero__chk-caixa {
+  position: relative; box-sizing: border-box;
+  width: 17px; height: 17px;
+  border: 1.5px solid var(--verde-musgo); border-radius: 0;
+  background: #fff;
+}
+.hero__chk-caixa::after {
+  content: ""; position: absolute; left: 4.4px; top: 1.2px;
+  width: 4.2px; height: 8.6px;
+  border: solid var(--verde-floresta); border-width: 0 2.2px 2.2px 0;
+  transform: rotate(42deg);
+  opacity: 0; transition: opacity .12s;
+}
+.hero__chk-txt { display: flex; flex-direction: column; min-width: 0; }
+.hero__chk-doc { font-size: 14.5px; font-weight: 650; line-height: 1.3; color: var(--grafite); transition: color .12s; }
+.hero__chk-desc { margin-top: 3px; font-size: 11.5px; font-weight: 500; line-height: 1.35; color: var(--grafite-suave); }
+.hero__chk-norma {
+  justify-self: end;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .1em; line-height: 1.2;
+  color: var(--verde-musgo);
+  border: 1px solid rgba(73,105,63,.38);
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+.hero__chk-input:checked + .hero__chk-linha .hero__chk-caixa::after { opacity: 1; }
+.hero__chk-input:checked + .hero__chk-linha .hero__chk-doc { color: var(--verde-floresta); }
+.hero__chk-input:focus-visible + .hero__chk-linha { outline: 2px solid var(--verde-musgo); outline-offset: 2px; }
+.hero__chk-linha:hover .hero__chk-caixa { background: #F7F7F3; }
+@media (prefers-reduced-motion: reduce) {
+  .hero__chk-caixa::after, .hero__chk-doc { transition: none; }
+}
+
+/* 5.4 rodapé do painel */
+.hero__chk-rodape {
+  display: flex; align-items: center; gap: 18px;
+  padding: 17px 28px 19px;
+  background: var(--creme-200);
+  border-top: 1px solid rgba(58,58,58,.14);
+}
+.hero__chk-btn {
+  flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px;
+  padding: 15px 22px;
+  background: var(--verde-floresta); color: var(--creme);
+  font-size: 13px; font-weight: 700; letter-spacing: .055em; text-transform: uppercase; line-height: 1.1;
+  text-decoration: none;
+}
+.hero__chk-btn:hover { background: var(--verde-escuro); color: var(--creme); }
+.hero__chk-btn:focus-visible { outline: 2px solid var(--verde-floresta); outline-offset: 3px; }
+.hero__chk-nota { margin: 0; font-size: 11.5px; line-height: 1.45; color: var(--grafite-suave); }
+.hero__chk-nota b { font-weight: 650; color: var(--grafite); }
+
+/* ─────────── T6 · desktop ≥900: painel na zona livre, copy sem CTAs ─────────── */
+@media (min-width: 900px) {
+  .hero--laudo { min-height: 810px; }   /* a altura medida do T5; a copy ficou mais curta sem as etiquetas e os CTAs */
+  .hero--laudo .hero__ctas { display: none; }   /* o CTA do painel é o único da dobra */
+  .hero__chk {
+    position: absolute; left: 51.67cqw; top: 120px;   /* 744px em 1440 */
+    width: min(616px, calc(48.33cqw - clamp(24px, 4vw, 64px) - max(0px, (100cqw - var(--container-max)) / 2)));
+  }
+}
+
+/* ─────────── T6 · mobile <900: parede leve, painel no fluxo, CTA de volta ─────────── */
+@media (max-width: 899.98px) {
+  .hero__parede {
+    opacity: .09;
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent 0, #000 86px, #000 calc(100% - 80px), transparent 100%),
+      radial-gradient(ellipse 80% 90% at 64% 46%, rgba(0,0,0,.60) 0, rgba(0,0,0,.70) 34%, rgba(0,0,0,.84) 60%, rgba(0,0,0,.95) 82%, #000 100%);
+            mask-image:
+      linear-gradient(to bottom, transparent 0, #000 86px, #000 calc(100% - 80px), transparent 100%),
+      radial-gradient(ellipse 80% 90% at 64% 46%, rgba(0,0,0,.60) 0, rgba(0,0,0,.70) 34%, rgba(0,0,0,.84) 60%, rgba(0,0,0,.95) 82%, #000 100%);
+    -webkit-mask-composite: source-in;   mask-composite: intersect;
+  }
+  .hero--laudo .hero__inner { padding-bottom: 0; }
+  .hero__chk { margin: 28px clamp(18px, 4.5vw, 30px) 40px; }
+  .hero__chk-cab { padding: 18px 20px 16px; gap: 13px; }
+  .hero__chk-intro, .hero__chk-lista { padding-inline: 20px; }
+  .hero__chk-linha { grid-template-columns: 18px 17px minmax(0, 1fr); gap: 6px 12px; }
+  .hero__chk-norma { grid-column: 3; justify-self: start; }
+  .hero__chk-rodape { flex-direction: column; align-items: stretch; gap: 12px; padding-inline: 20px; }
+  .hero__chk-btn { text-align: center; }
+}
