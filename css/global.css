@@ -900,6 +900,14 @@ body.sem-scroll { overflow: hidden; }
     height: 48px;
   }
   .whatsapp-float .icone { width: 24px; height: 24px; }
+  /* T8 (G1): alvo de toque de 48px nos 4 contatos do rodapé; a margem negativa mantém o passo de 40px */
+  .rodape a[href^="tel:"],
+  .rodape a[href^="mailto:"],
+  .rodape a[href*="wa.me"],
+  .rodape a[href*="instagram"] {
+    min-height: 48px;
+    margin-block: -4px;
+  }
 }
 
 @media (max-width: 359px) {

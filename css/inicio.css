@@ -1194,3 +1194,9 @@
   }
   .cert-card__texto { line-height: 1.62; }
 }
+
+/* T8 (H3): no celular a faixa "+20 anos / CREA" sai — os mesmos dados estão nas quatro credenciais do hero. Desktop mantém. */
+@media (max-width: 899.98px) {
+  .prova-faixa { display: none; }
+  .faq__num { color: var(--grafite); }   /* T8 (F2): no celular o areia dava 2,04:1 no fundo do FAQ; desktop mantém o areia */
+}

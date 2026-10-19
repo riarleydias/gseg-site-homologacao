@@ -202,6 +202,7 @@
 }
 .hero__parede svg { display: block; width: 100%; height: 100%; }
 .hero__parede text { font-family: var(--font-body); font-weight: 800; letter-spacing: .02em; }
+.hero__parede .hero__parede-m { display: none; }   /* T8: escala própria abaixo de 1150 (38px, passo 132 × 80) */
 @media (prefers-contrast: more), (forced-colors: active), print { .hero__parede { display: none; } }
 
 /* ═══════════════════════════ T6 · PAINEL DE CHECAGEM ═══════════════════════════
@@ -332,16 +333,19 @@
 
 /* ─────────── T6 · <1150: parede leve, painel no fluxo, CTA de volta ─────────── */
 @media (max-width: 1149.98px) {
+  /* T8 (H2): parede reescalada — sem a camada horizontal da máscara, que não faz sentido sem coluna livre */
   .hero__parede {
-    opacity: .09;
+    opacity: .11;
     -webkit-mask-image:
-      linear-gradient(to bottom, transparent 0, #000 86px, #000 calc(100% - 80px), transparent 100%),
-      radial-gradient(ellipse 80% 90% at 64% 46%, rgba(0,0,0,.60) 0, rgba(0,0,0,.70) 34%, rgba(0,0,0,.84) 60%, rgba(0,0,0,.95) 82%, #000 100%);
+      linear-gradient(to bottom, transparent 0, #000 54px, #000 calc(100% - 46px), transparent 100%),
+      radial-gradient(ellipse 92% 80% at 50% 44%, rgba(0,0,0,.58) 0, rgba(0,0,0,.74) 42%, rgba(0,0,0,.92) 76%, #000 100%);
             mask-image:
-      linear-gradient(to bottom, transparent 0, #000 86px, #000 calc(100% - 80px), transparent 100%),
-      radial-gradient(ellipse 80% 90% at 64% 46%, rgba(0,0,0,.60) 0, rgba(0,0,0,.70) 34%, rgba(0,0,0,.84) 60%, rgba(0,0,0,.95) 82%, #000 100%);
+      linear-gradient(to bottom, transparent 0, #000 54px, #000 calc(100% - 46px), transparent 100%),
+      radial-gradient(ellipse 92% 80% at 50% 44%, rgba(0,0,0,.58) 0, rgba(0,0,0,.74) 42%, rgba(0,0,0,.92) 76%, #000 100%);
     -webkit-mask-composite: source-in;   mask-composite: intersect;
   }
+  .hero__parede .hero__parede-d { display: none; }
+  .hero__parede .hero__parede-m { display: block; }
   .hero--laudo .hero__inner { padding-bottom: 0; }
   .hero--laudo .hero__ctas { flex-direction: column; }
   .hero--laudo .hero__ctas .btn { width: 100%; }

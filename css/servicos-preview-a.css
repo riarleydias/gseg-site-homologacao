@@ -574,3 +574,50 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
 @media (max-width: 767.98px), (prefers-contrast: more), (forced-colors: active), print { .pa-pagina .pa-hero::before, .pa-pagina .pa-hero::after { display: none; } }   /* celular: o texto do hero ocupa a largura toda */
 
 .pa-ma__faixa { width: 100%; }
+
+/* ═══════════════ T8 · ajustes de celular (<768, o corte próprio desta página) ═══════════════ */
+@media (max-width: 767.98px) {
+  /* S2 — quebras: títulos e subtítulos equilibrados, corpo sem órfã; o link da assinatura não parte */
+  .pa-pagina main h1, .pa-pagina main h2, .pa-pagina main h3, .pa-hero__sub, .pa-grupo__linha { text-wrap: balance; }
+  .pa-pagina main p:not(.pa-hero__sub):not(.pa-grupo__linha) { text-wrap: pretty; }
+  .pa-hero__link { display: inline-block; padding-block: 10.75px; margin-block: -10.75px; }   /* G1: 22,5px de texto → 44px de toque, sem mexer no parágrafo (medido 390/320) */
+
+  /* S3 — Acesso Rápido em lista: a grade vai no link (o li tem um filho só); sem fio pontilhado */
+  .pa-atalho {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 8px;
+    align-items: center;
+    flex-wrap: unset;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(58, 58, 58, .12);
+  }
+  .pa-atalhos__lista li:last-child .pa-atalho { border-bottom: 0; }
+  .pa-atalho__sigla { grid-column: 1; grid-row: 1; font-family: var(--font-accent); font-style: italic; font-size: 14px; line-height: 1.15; color: #776037; }
+  .pa-atalho__nome  { grid-column: 2; grid-row: 1; font-family: var(--font-body); font-weight: 650; font-size: 14px; line-height: 1.32; }
+  .pa-atalho__num   { grid-column: 3; grid-row: 1; min-width: 0; font-family: var(--font-accent); font-style: italic; font-size: 13.5px; color: var(--grafite-suave); font-variant-numeric: tabular-nums; }
+  .pa-atalho__pontos { display: none; }
+  .pa-atalho__selo {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    order: unset;
+    justify-self: start;
+    margin: 6px 0 0;
+    padding: 3px 7px;
+    background: #C2B49B;
+    color: #243520;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .07em;
+  }
+
+  /* S4 — a barra fixa mede 65px de 330 a 767 e 82,5px de 320 a 329 (os botões quebram linha), medido: corpo com a altura + 16 de respiro */
+  .pa-pagina { padding-bottom: calc(65px + 16px + env(safe-area-inset-bottom)); }
+
+  /* S5 — chip de Meio Ambiente: fundo escurecido (medido em 390: 5,37:1 com a lavagem clara → 7,18:1); a cor do texto não muda */
+  .pa-ma { --pa-c-chip-fundo: rgba(0, 0, 0, .14); }
+}
+@media (max-width: 329.98px) {
+  .pa-pagina { padding-bottom: calc(82.5px + 16px + env(safe-area-inset-bottom)); }
+}
