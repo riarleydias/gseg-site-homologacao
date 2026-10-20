@@ -655,7 +655,12 @@ body.sem-scroll { overflow: hidden; }
   position: relative;
   isolation: isolate;
   border-top: 2px solid var(--areia);
-  background: linear-gradient(168deg, #121B0E 0%, #1C2A15 100%);   /* T11-B: verde escuro do hero de serviços no celular (era 180deg verde-floresta → verde-escuro) */
+  /* T12-B: fundo do hero da home no celular (hero-checagem.css:154 + o fecho .hero::after de refinamento-home.css:616 embaixo); só longhands */
+  background-color: transparent;
+  background-image: linear-gradient(to top, rgba(36, 53, 32, .32) 0%, rgba(36, 53, 32, .10) 50%, transparent 100%), linear-gradient(168deg, #121B0E 0%, #1C2A15 100%);
+  background-size: 100% 110px, 100% 1769px;   /* o gradiente com o comprimento do hero da home em 390 (1769px): num bloco de 450px ele esticava e o pé ficava 12 por canal mais claro */
+  background-position: 0 100%, 0 0;
+  background-repeat: no-repeat, no-repeat;
   color: var(--texto-claro-2);
 }
 .rodape > .container { position: relative; z-index: 1; }
@@ -784,6 +789,16 @@ body.sem-scroll { overflow: hidden; }
 /* máscara = esmaecimento topo/base ∩ vinheta (centro ~40% mais leve, sem anel) ∩ zonas de proteção do texto */
 .rodape::before { background-image: var(--est-g-tile); background-size: 224px 224px; opacity: var(--est-g-op); }
 .rodape::after  { background-image: var(--est-w-tile); opacity: var(--est-w-op); }
+/* T12-C · estampa do rodapé (todas as larguras) igual à parede de NRs da home no celular: tile estampa-nr.svg (marcas com 29px,
+   linhas a cada 80px, colunas a cada 132px, deslocamento 43px, #C2B49B), ancorado no topo esquerdo; o ::after (palavra solta) sai */
+.rodape::before {
+  background-image: url("../img/estampa/estampa-nr.svg?v=20261020-t12");
+  background-size: 264px 160px;
+  background-origin: border-box;
+  background-position: 0 0;
+  opacity: .25;   /* O6: subida em passos de .02 até a presença igualar a das NRs da home (régua do Otto: 1,668 × 1,634); pior texto 6,11:1 */
+}
+.rodape::after { background-image: none; }
 .rodape::before {
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%), radial-gradient(ellipse 75% 95% at 50% 50%, rgba(0,0,0,.6) 0, rgba(0,0,0,.61) 15%, rgba(0,0,0,.66) 30%, rgba(0,0,0,.75) 45%, rgba(0,0,0,.86) 60%, rgba(0,0,0,.95) 78%, #000 100%), var(--est-zona-g);
           mask-image: linear-gradient(to bottom, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%), radial-gradient(ellipse 75% 95% at 50% 50%, rgba(0,0,0,.6) 0, rgba(0,0,0,.61) 15%, rgba(0,0,0,.66) 30%, rgba(0,0,0,.75) 45%, rgba(0,0,0,.86) 60%, rgba(0,0,0,.95) 78%, #000 100%), var(--est-zona-g);

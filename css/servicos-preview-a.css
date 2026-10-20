@@ -618,40 +618,52 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
   /* S5 — chip de Meio Ambiente: fundo escurecido (medido em 390: 5,37:1 com a lavagem clara → 7,18:1); a cor do texto não muda */
   .pa-ma { --pa-c-chip-fundo: rgba(0, 0, 0, .14); }
 
-  /* T11-A · G ornamental no celular na lateral direita, como no desktop (right −10vw, top −170px — servicos-preview-a.css:107-108),
-     com largura 86vw (o min(86vw, 980px) do desktop), opacidade .15 e sem máscara; o stroke metálico vem da regra geral (:112). Decisão do Riarley, 20/10 */
+  /* T12-A · G ornamental no celular na zona marcada pelo Riarley: contorno do desenho do topo do eyebrow até 12px acima de
+     "Pedir orçamento", encostado à direita (cálculo do Passo 0 em 390: W 275,36 · left 137,19 · top 25,8). Opacidade e máscara
+     iguais ao desktop: .08 sem JS, 1 com JS (.pa-js), e o zonaArco() apaga o traço só atrás do título e do subtítulo. */
   .pa-pagina .pa-hero .pa-hero__arco {
-    top: -170px;
-    right: -10vw;
-    left: auto;
+    top: 25.8px;
+    left: calc(137.19 / 390 * 100vw);
+    right: auto;
     bottom: auto;
     transform: none;
-    width: 86vw;
+    width: calc(275.36 / 390 * 100vw);
+    height: auto;
     max-width: none;
-    opacity: .15;
-    mask-image: none;
-    -webkit-mask-image: none;
   }
-  /* T10-REV2-B1 · fundo do hero igual ao da home no celular (hero-checagem.css:154) */
-  .pa-pagina .pa-hero {
-    background: linear-gradient(168deg, #121B0E 0%, #1C2A15 100%);
-  }
-  /* T10-REV2-B2 · estampa do hero sem a máscara lateral (40%→75%) e com opacidade .30 — presença próxima da parede de NRs da home
-     (energia 1,30 × 1,35 na régua do Otto); decisão do Riarley, 20/10, aceitando o EM do título a 4,31:1 (texto grande, 3:1) */
-  .pa-pagina .pa-hero::before,
-  .pa-pagina .pa-hero::after {
-    opacity: .30;
-  }
-  /* T11-C · estampa mais densa no celular: G em 140px; palavra em 140×80 (mantém a proporção 196×112 do tile) */
-  .pa-pagina .pa-hero::before { background-size: 140px 140px; }
-  .pa-pagina .pa-hero::after  { background-size: 140px 80px; }
+  /* T12-D · estampa do hero igual à parede de NRs da home no celular: tile estampa-nr.svg (marcas com 29px de altura, linhas a
+     cada 80px, colunas a cada 132px, deslocamento alternado de 43px, cor #C2B49B), ancorado no topo esquerdo como as NRs,
+     sem blend nem filtro; opacidade ajustada abaixo. Uma camada só: o ::after (palavra solta) sai, a palavra já está no tile novo. */
   .pa-pagina .pa-hero::before {
+    background-image: url("../img/estampa/estampa-nr.svg?v=20261020-t12");
+    background-size: 264px 160px;
+    background-origin: border-box;
+    background-position: 0 0;
+    background-repeat: repeat;
+    opacity: .21;   /* O6: subida em passos de .02 até a presença igualar a das NRs da home (régua do Otto: 1,671 × 1,634); pior texto 6,75:1 */
     -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-g);
             mask-image: linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-g);
   }
-  .pa-pagina .pa-hero::after {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-w);
-            mask-image: linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-w);
+  .pa-pagina .pa-hero::after { background-image: none; }
+}
+/* T12-A · ajustes por largura do G (mesmo cálculo do Passo 0 em cada largura, decisão do Riarley 20/10):
+   360 → zona em H 230,22; com 6,4px de sangria à direita (1,8%) a borda esquerda do desenho fica em 38%.
+   430 → os botões sobem (H 204,91); o desenho encosta à direita e a borda esquerda fica em 52% (não cabe em 38–42% sem estourar a base). */
+@media (max-width: 374.98px) {
+  .pa-pagina .pa-hero .pa-hero__arco { top: 25.85px; left: calc(114.2 / 360 * 100vw); width: calc(274.7 / 360 * 100vw); }
+}
+@media (min-width: 414px) and (max-width: 767.98px) {
+  .pa-pagina .pa-hero .pa-hero__arco { top: 28.29px; left: calc(205.53 / 430 * 100vw); width: calc(244.49 / 430 * 100vw); }
+}
+/* T12-B · hero de serviços abaixo de 900 com o fundo do hero da home no celular (hero-checagem.css:154 + o fecho .hero::after de
+   refinamento-home.css:616 como camada de baixo); só longhands */
+@media (max-width: 899.98px) {
+  .pa-pagina .pa-hero {
+    background-color: transparent;
+    background-image: linear-gradient(to top, rgba(36, 53, 32, .32) 0%, rgba(36, 53, 32, .10) 50%, transparent 100%), linear-gradient(168deg, #121B0E 0%, #1C2A15 100%);
+    background-size: 100% 110px, 100% 100%;
+    background-position: 0 100%, 0 0;
+    background-repeat: no-repeat, no-repeat;
   }
 }
 @media (max-width: 329.98px) {

@@ -39,11 +39,15 @@
     // arco do G (T2): some atrás de todo o texto do hero (eyebrow, título, subtítulo, ações, assinatura), com ~60px de transição; o brilho fica só no arco que sobra fora do texto
     const arco = hero && hero.querySelector(".pa-hero__arco");
     function zonaArco() {
-      if (window.innerWidth < 768) return;   // T9-R1: no celular o G é papel de parede (sem máscara, ver o CSS)
       const E = window.gsegEstampa; if (!arco || !E) return;
       const o = arco.getBoundingClientRect(), w = Math.round(o.width), h = Math.round(o.height); if (w < 2 || h < 2) return;
       const r = [];
-      [".pa-hero__eyebrow", ".pa-hero__titulo", ".pa-hero__sub", ".pa-hero__acoes", ".pa-hero__assina"].forEach(function (sel) {
+      // T12: no celular o G fica na zona do título (CSS) e a máscara só apaga o traço atrás do título e do subtítulo, os blocos que
+      // reprovavam contraste; o resto do traço aparece inteiro, como no desktop. No desktop a lista é a de sempre.
+      const blocos = window.innerWidth < 768
+        ? [".pa-hero__titulo", ".pa-hero__sub"]
+        : [".pa-hero__eyebrow", ".pa-hero__titulo", ".pa-hero__sub", ".pa-hero__acoes", ".pa-hero__assina"];
+      blocos.forEach(function (sel) {
         const e = hero.querySelector(sel); if (!e || getComputedStyle(e).visibility === "hidden") return;
         const g = document.createRange(); g.selectNodeContents(e);
         const q = sel === ".pa-hero__acoes" ? e.getBoundingClientRect() : g.getBoundingClientRect();
