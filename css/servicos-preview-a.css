@@ -652,7 +652,15 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
 @media (max-width: 374.98px) {
   .pa-pagina .pa-hero .pa-hero__arco { top: 25.85px; left: calc(114.2 / 360 * 100vw); width: calc(274.7 / 360 * 100vw); }
 }
-@media (min-width: 414px) and (max-width: 767.98px) {
+/* T13 · faixas 400–429: a quebra do texto do hero muda entre 411 e 412 (os botões sobem 26px), então o G ali vai em px e
+   encostado à direita, com a largura medida pelo mesmo cálculo (H constante dentro de cada faixa). */
+@media (min-width: 400px) and (max-width: 411.98px) {
+  .pa-pagina .pa-hero .pa-hero__arco { top: 25.78px; left: calc(100vw - 252.97px); width: 275.6px; }
+}
+@media (min-width: 412px) and (max-width: 429.98px) {
+  .pa-pagina .pa-hero .pa-hero__arco { top: 28.31px; left: calc(100vw - 224.19px); width: 244.2px; }
+}
+@media (min-width: 430px) and (max-width: 767.98px) {
   .pa-pagina .pa-hero .pa-hero__arco { top: 28.29px; left: calc(205.53 / 430 * 100vw); width: calc(244.49 / 430 * 100vw); }
 }
 /* T12-B · hero de serviços abaixo de 900 com o fundo do hero da home no celular (hero-checagem.css:154 + o fecho .hero::after de
