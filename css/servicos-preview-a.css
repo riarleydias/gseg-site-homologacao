@@ -618,14 +618,15 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
   /* S5 — chip de Meio Ambiente: fundo escurecido (medido em 390: 5,37:1 com a lavagem clara → 7,18:1); a cor do texto não muda */
   .pa-ma { --pa-c-chip-fundo: rgba(0, 0, 0, .14); }
 
-  /* T10-REV2-A · G ornamental centralizado; o verde metálico vem do stroke url(#gseg-g-shimmer) da regra geral (:112).
-     Opacidade .15 por decisão do Riarley (20/10): com a do desktop (1) e sem máscara, o brilho do traço derrubava o texto do hero a 1,38:1 */
+  /* T11-A · G ornamental no celular na lateral direita, como no desktop (right −10vw, top −170px — servicos-preview-a.css:107-108),
+     com largura 86vw (o min(86vw, 980px) do desktop), opacidade .15 e sem máscara; o stroke metálico vem da regra geral (:112). Decisão do Riarley, 20/10 */
   .pa-pagina .pa-hero .pa-hero__arco {
-    top: 50%;
-    left: 50%;
-    right: auto;
-    transform: translate(-50%, -50%);
-    width: 100vw;
+    top: -170px;
+    right: -10vw;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    width: 86vw;
     max-width: none;
     opacity: .15;
     mask-image: none;
@@ -641,6 +642,9 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
   .pa-pagina .pa-hero::after {
     opacity: .30;
   }
+  /* T11-C · estampa mais densa no celular: G em 140px; palavra em 140×80 (mantém a proporção 196×112 do tile) */
+  .pa-pagina .pa-hero::before { background-size: 140px 140px; }
+  .pa-pagina .pa-hero::after  { background-size: 140px 80px; }
   .pa-pagina .pa-hero::before {
     -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-g);
             mask-image: linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-g);

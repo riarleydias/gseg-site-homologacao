@@ -655,7 +655,7 @@ body.sem-scroll { overflow: hidden; }
   position: relative;
   isolation: isolate;
   border-top: 2px solid var(--areia);
-  background: linear-gradient(180deg, var(--verde-floresta) 0%, var(--verde-escuro) 100%);
+  background: linear-gradient(168deg, #121B0E 0%, #1C2A15 100%);   /* T11-B: verde escuro do hero de serviços no celular (era 180deg verde-floresta → verde-escuro) */
   color: var(--texto-claro-2);
 }
 .rodape > .container { position: relative; z-index: 1; }
