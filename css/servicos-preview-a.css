@@ -660,8 +660,17 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
 @media (min-width: 412px) and (max-width: 429.98px) {
   .pa-pagina .pa-hero .pa-hero__arco { top: 28.31px; left: calc(100vw - 224.19px); width: 244.2px; }
 }
-@media (min-width: 430px) and (max-width: 767.98px) {
-  .pa-pagina .pa-hero .pa-hero__arco { top: 28.29px; left: calc(205.53 / 430 * 100vw); width: calc(244.49 / 430 * 100vw); }
+/* T14 · 430–767: a zona do G quase não cresce com a largura (H 204,9 em 430 → 223,2 em 767; nenhuma quebra de texto nova), então
+   o G deixa de escalar com a viewport e segue a zona medida a cada 1px: retas ajustadas por faixa (mínimos quadrados), encostado
+   à direita. Em 580 a zona passa a crescer mais rápido e em 687 o eyebrow começa a descer. */
+@media (min-width: 430px) and (max-width: 579.98px) {
+  .pa-pagina .pa-hero .pa-hero__arco { top: calc(28.79px - 0.1165vw); left: calc(98.6834vw - 218.80px); width: calc(238.31px + 1.4349vw); }
+}
+@media (min-width: 580px) and (max-width: 686.98px) {
+  .pa-pagina .pa-hero .pa-hero__arco { top: calc(32.99px - 0.8422vw); left: calc(90.4068vw - 170.96px); width: calc(186.20px + 10.4502vw); }
+}
+@media (min-width: 687px) and (max-width: 767.98px) {
+  .pa-pagina .pa-hero .pa-hero__arco { top: calc(6.1553vw - 15.00px); left: calc(90.4004vw - 170.92px); width: calc(186.13px + 10.4601vw); }
 }
 /* T12-B · hero de serviços abaixo de 900 com o fundo do hero da home no celular (hero-checagem.css:154 + o fecho .hero::after de
    refinamento-home.css:616 como camada de baixo); só longhands */
