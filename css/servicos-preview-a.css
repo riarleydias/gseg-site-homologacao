@@ -618,22 +618,36 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
   /* S5 — chip de Meio Ambiente: fundo escurecido (medido em 390: 5,37:1 com a lavagem clara → 7,18:1); a cor do texto não muda */
   .pa-ma { --pa-c-chip-fundo: rgba(0, 0, 0, .14); }
 
-  /* T10-A · G ornamental: corrigir posição e artefato de borda */
+  /* T10-REV2-A · G ornamental centralizado; o verde metálico vem do stroke url(#gseg-g-shimmer) da regra geral (:112).
+     Opacidade .15 por decisão do Riarley (20/10): com a do desktop (1) e sem máscara, o brilho do traço derrubava o texto do hero a 1,38:1 */
   .pa-pagina .pa-hero .pa-hero__arco {
-    top: 40%;
-    right: auto;
+    top: 50%;
     left: 50%;
+    right: auto;
     transform: translate(-50%, -50%);
-    width: 120vw;
+    width: 100vw;
     max-width: none;
-    opacity: 0.11;
+    opacity: .15;
     mask-image: none;
     -webkit-mask-image: none;
   }
-  /* T10-B · estampa do hero com a mesma opacidade da parede de NRs da home no celular (.11, hero-checagem.css:338) */
+  /* T10-REV2-B1 · fundo do hero igual ao da home no celular (hero-checagem.css:154) */
+  .pa-pagina .pa-hero {
+    background: linear-gradient(168deg, #121B0E 0%, #1C2A15 100%);
+  }
+  /* T10-REV2-B2 · estampa do hero sem a máscara lateral (40%→75%) e com opacidade .30 — presença próxima da parede de NRs da home
+     (energia 1,30 × 1,35 na régua do Otto); decisão do Riarley, 20/10, aceitando o EM do título a 4,31:1 (texto grande, 3:1) */
   .pa-pagina .pa-hero::before,
   .pa-pagina .pa-hero::after {
-    opacity: .11;
+    opacity: .30;
+  }
+  .pa-pagina .pa-hero::before {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-g);
+            mask-image: linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-g);
+  }
+  .pa-pagina .pa-hero::after {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-w);
+            mask-image: linear-gradient(to bottom, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%), var(--pa-zona-hero-w);
   }
 }
 @media (max-width: 329.98px) {
