@@ -930,6 +930,11 @@ body.sem-scroll { overflow: hidden; }
   .rodape ul {
     grid-template-columns: repeat(3, 1fr);
   }
+  /* T10-C · e-mail em linha própria, ocupando as 2 colunas (cabe em 1 linha em 390; decisão do Riarley, 20/10) */
+  .rodape__contato a[href^="mailto:"] {
+    grid-column: 1 / -1;
+    order: 3;
+  }
 }
 
 @media (max-width: 359px) {

@@ -618,17 +618,22 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
   /* S5 — chip de Meio Ambiente: fundo escurecido (medido em 390: 5,37:1 com a lavagem clara → 7,18:1); a cor do texto não muda */
   .pa-ma { --pa-c-chip-fundo: rgba(0, 0, 0, .14); }
 
-  /* T9-R1 · G ornamental: papel de parede mobile */
+  /* T10-A · G ornamental: corrigir posição e artefato de borda */
   .pa-pagina .pa-hero .pa-hero__arco {
-    top: 50%;
+    top: 40%;
     right: auto;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 130vw;
-    max-width: none;   /* o reset.css limita svg a 100% e prendia o G na largura do hero (gate Otto, 19/10) */
+    width: 120vw;
+    max-width: none;
     opacity: 0.11;
     mask-image: none;
     -webkit-mask-image: none;
+  }
+  /* T10-B · estampa do hero com a mesma opacidade da parede de NRs da home no celular (.11, hero-checagem.css:338) */
+  .pa-pagina .pa-hero::before,
+  .pa-pagina .pa-hero::after {
+    opacity: .11;
   }
 }
 @media (max-width: 329.98px) {
