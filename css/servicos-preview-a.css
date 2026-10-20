@@ -686,3 +686,33 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
 @media (max-width: 329.98px) {
   .pa-pagina { padding-bottom: calc(82.5px + 16px + env(safe-area-inset-bottom)); }
 }
+/* T15 · hero de serviços a partir de 900: fundo do hero da home no desktop (hero-checagem.css:31) e estampa no lugar da
+   parede de NRs, com o mesmo comportamento da home (hero-checagem.css:186 e 335): de 1150 em diante o tile estampa-nr-d.svg
+   (as 5 linhas da parede desktop, logo no lugar de cada NR, mesmo tamanho, posição, passo e deslocamento) cobre o hero como o
+   SVG da home (xMidYMid slice = cover centrado, sem repetição); de 900 a 1149 a home troca para a parede leve de 38px, então
+   aqui entra o estampa-nr.svg do celular (264×160 no topo esquerdo). O esmaecimento lateral continua (a home também tem o
+   dela); o ::after sai porque a palavra já está no tile. G, máscara do JS e celular sem alteração. Só longhands. */
+@media (min-width: 900px) {
+  .pa-pagina .pa-hero {
+    background-color: #121B0E;
+    background-image: linear-gradient(100deg, #121B0E 0%, #1F2E17 42%, #2F4224 100%);
+  }
+  .pa-pagina .pa-hero::before {
+    background-image: url("../img/estampa/estampa-nr.svg?v=20261020-t15");
+    background-size: 264px 160px;
+    background-origin: border-box;
+    background-position: 0 0;
+    background-repeat: repeat;
+    opacity: .29;   /* régua do Otto na metade direita do hero (o esmaecimento lateral deixa a esquerda vazia): 1024 → 1,601 × NRs 1,555 */
+  }
+  .pa-pagina .pa-hero::after { background-image: none; }
+}
+@media (min-width: 1150px) {
+  .pa-pagina .pa-hero::before {
+    background-image: url("../img/estampa/estampa-nr-d.svg?v=20261020-t15");
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    opacity: .33;   /* régua na metade direita: 1280 → 2,289 × NRs 2,306 · 1440 → 2,317 × 2,214 */
+  }
+}
