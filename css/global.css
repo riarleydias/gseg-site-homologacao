@@ -921,8 +921,8 @@ body.sem-scroll { overflow: hidden; }
   .rodape a[href^="mailto:"],
   .rodape a[href*="wa.me"],
   .rodape a[href*="instagram"] {
-    min-height: 40px;   /* T9 (C3e + calibragem 3): era 48px (T8) */
-    margin-block: -2px;   /* T9-R1: era -4px (T8) */
+    min-height: 44px;   /* T16: alvo de toque mínimo de 44px (era 40px no T9; 48px no T8) */
+    margin-block: -1px;   /* T16: passo de 42px entre linhas, rodapé +18px a 390 (limite +20); vizinhos se sobrepõem 2px. Era -2px (T9-R1) */
   }
 }
 

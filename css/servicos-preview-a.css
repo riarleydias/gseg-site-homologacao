@@ -706,6 +706,9 @@ html { scroll-padding-top: calc(var(--pa-header-h) + 64px); }
     opacity: .29;   /* régua do Otto na metade direita do hero (o esmaecimento lateral deixa a esquerda vazia): 1024 → 1,601 × NRs 1,555 */
   }
   .pa-pagina .pa-hero::after { background-image: none; }
+  /* T16 · a caixa do eyebrow fica com a largura do texto: como bloco ela ia até 1078px e a estampa passava na parte vazia
+     (caixa inteira 3,94:1 a 1280; no texto 9,81). Sem mudança visual; o zonaArco() já mede o texto por Range. */
+  .pa-hero__eyebrow { width: fit-content; }
 }
 @media (min-width: 1150px) {
   .pa-pagina .pa-hero::before {
