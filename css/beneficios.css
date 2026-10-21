@@ -31,12 +31,15 @@
 .benef-secao-titulo { font-family: var(--bf-display); font-weight: 700; font-size: clamp(28px, 4vw, 36px); line-height: 1.15; color: var(--bf-titulo); margin-bottom: 10px; }
 
 /* ---------- Hero escuro ---------- */
+/* T17 · fundo = o do hero da Início (hero-checagem.css:31; computado: background-color rgba(0,0,0,0)), só longhands. Saem o verde
+   oliva (E1), as linhas verticais (E2: repeating-linear-gradient 90deg .045 a cada 84px, em todas as larguras) e os acentos E3/E4,
+   que eram todos camadas deste mesmo background. Abaixo de 900 vale o gradiente de 168deg da Início no celular (bloco T17 no fim). */
 .benef-hero {
-  background:
-    radial-gradient(80% 120% at 92% 12%, rgba(194,180,155,.10), transparent 60%),   /* E4 — acento areia canto sup-dir */
-    radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.05), transparent 58%),      /* E3 — brilho de topo */
-    repeating-linear-gradient(90deg, rgba(242,241,236,.045) 0 1px, transparent 1px 84px), /* E2 */
-    linear-gradient(168deg, var(--verde-floresta) 0%, var(--verde-escuro) 100%);      /* E1 */
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: linear-gradient(100deg, #121B0E 0%, #1F2E17 42%, #2F4224 100%);
   color: var(--texto-claro);
   padding-block: 88px 80px;
 }
@@ -140,4 +143,61 @@
 @media (min-width: 1024px) {
   .benef-cards { grid-template-columns: repeat(3, 1fr); }
   .benef-seg__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* =============================================================================
+   T17 · HERO DE BENEFÍCIOS: FUNDO E PAREDE TIPOGRÁFICA DA INÍCIO (eSocial/PGR)
+   Clone da parede de NRs da Início (index.html .hero__parede + hero-checagem.css:186–206 e 334–348): mesmo SVG inline com <text>
+   (Inter 800, letter-spacing .02em; o <svg> é a mesma técnica porque o texto usa a webfont da página, que um SVG em <img>
+   não carrega), mesma cor --areia #C2B49B, mesmas opacidades (.14; .11 abaixo de 1150), mesmo blend/filter (normal/none),
+   mesmas máscaras e a mesma troca por largura (≥1150 parede-d; abaixo, parede-m de 38px). Só os tokens mudaram.
+   Única adaptação: na Início o hero desktop tem sempre 810px de altura e a parede-d fica em escala 1; aqui o <svg> desktop
+   ganha 810px fixos para manter a mesma escala, linhas e offsets, e o hero (mais baixo) recorta o que sobra.
+   Camadas: fundo → parede (z 0) → texto (z 1). Só longhands.
+   ============================================================================= */
+.benef-hero__parede {
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+  color: var(--areia);
+  opacity: .14;
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0, #000 86px, #000 calc(100% - 80px), transparent 100%),
+    linear-gradient(to right, transparent 20px, rgba(0,0,0,.34) 210px, rgba(0,0,0,.78) 440px, #000 640px),
+    radial-gradient(ellipse 80% 90% at 64% 46%, rgba(0,0,0,.60) 0, rgba(0,0,0,.70) 34%, rgba(0,0,0,.84) 60%, rgba(0,0,0,.95) 82%, #000 100%);
+          mask-image:
+    linear-gradient(to bottom, transparent 0, #000 86px, #000 calc(100% - 80px), transparent 100%),
+    linear-gradient(to right, transparent 20px, rgba(0,0,0,.34) 210px, rgba(0,0,0,.78) 440px, #000 640px),
+    radial-gradient(ellipse 80% 90% at 64% 46%, rgba(0,0,0,.60) 0, rgba(0,0,0,.70) 34%, rgba(0,0,0,.84) 60%, rgba(0,0,0,.95) 82%, #000 100%);
+  -webkit-mask-size: 100% 100%;           mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;         mask-repeat: no-repeat;
+  -webkit-mask-composite: source-in, source-in;   mask-composite: intersect, intersect;
+}
+.benef-hero__parede svg { display: block; width: 100%; height: 100%; }
+.benef-hero__parede .benef-hero__parede-d { height: 810px; }   /* altura do hero da Início ≥1150 (medida): escala 1, como lá */
+.benef-hero__parede text { font-family: var(--font-body); font-weight: 800; letter-spacing: .02em; }
+.benef-hero__parede .benef-hero__parede-m { display: none; }
+.benef-hero > .container { position: relative; z-index: 1; }
+@media (prefers-contrast: more), (forced-colors: active), print { .benef-hero__parede { display: none; } }
+@media (max-width: 1149.98px) {
+  .benef-hero__parede {
+    opacity: .11;
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent 0, #000 54px, #000 calc(100% - 46px), transparent 100%),
+      radial-gradient(ellipse 92% 80% at 50% 44%, rgba(0,0,0,.58) 0, rgba(0,0,0,.74) 42%, rgba(0,0,0,.92) 76%, #000 100%);
+            mask-image:
+      linear-gradient(to bottom, transparent 0, #000 54px, #000 calc(100% - 46px), transparent 100%),
+      radial-gradient(ellipse 92% 80% at 50% 44%, rgba(0,0,0,.58) 0, rgba(0,0,0,.74) 42%, rgba(0,0,0,.92) 76%, #000 100%);
+    -webkit-mask-composite: source-in;   mask-composite: intersect;
+  }
+  .benef-hero__parede .benef-hero__parede-d { display: none; }
+  .benef-hero__parede .benef-hero__parede-m { display: block; }
+}
+/* abaixo de 900 a Início usa linear-gradient(168deg, #121B0E 0%, #1C2A15 100%) (hero-checagem.css:154) estendido pelo hero
+   dela (1769px a 390); aqui com o mesmo comprimento, para os mesmos pixels num hero mais baixo */
+@media (max-width: 899.98px) {
+  .benef-hero {
+    background-image: linear-gradient(168deg, #121B0E 0%, #1C2A15 100%);
+    background-size: 100% 1769px;
+    background-repeat: no-repeat;
+  }
 }
